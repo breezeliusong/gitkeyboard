@@ -13,6 +13,7 @@
                 <RowDefinition />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Button Content="Next"  Width="50" Margin="10" Height="30" Click="NewClick" />
             <TextBox GotFocus="TextBox_GotFocus"  Margin="10,400,0,0" LostFocus="TextBox_LostFocus" Width="200" Height="0" Grid.Row="0"/>
             <Grid Name="G1"
                   Grid.Row="1"

@@ -101,6 +101,9 @@
     <Compile Include="KeyBoard3.xaml.cs">
       <DependentUpon>KeyBoard3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="KeyBoard4.xaml.cs">
+      <DependentUpon>KeyBoard4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="KeyBoard3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="KeyBoard4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

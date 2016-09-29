@@ -48,5 +48,10 @@ namespace KeyBoard2
             G1.Visibility = Visibility.Collapsed;
         }
         double height;
+
+        private void NewClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(KeyBoard4));
+        }
     }
 }
