@@ -20,33 +20,42 @@ namespace KeyBoard2
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class KeyBoard3 : Page
+    public sealed partial class KeyBoard1 : Page
     {
-        public KeyBoard3()
+        double height;
+        public KeyBoard1()
         {
             this.InitializeComponent();
-            Windows.UI.ViewManagement.InputPane.GetForCurrentView().Showing += (input, arg) =>
-            {
-                input.TryHide();
-                MyScrollViewer.ChangeView(null, height, null, true);
-            };
+        }
+        private void T2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryHide();
+            Row2.Height = new GridLength(height);
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void T2_LostFocus(object sender, RoutedEventArgs e)
         {
-            G1.Visibility = Visibility.Visible;
-        }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            G1.Visibility = Visibility.Collapsed;
+            Row2.Height = new GridLength(0);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
             height = G1.ActualHeight;
-            G1.Visibility = Visibility.Collapsed;
+            Row2.Height = new GridLength(0);
         }
-        double height;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(KeyBoard3));
+        }
+
+        
     }
 }

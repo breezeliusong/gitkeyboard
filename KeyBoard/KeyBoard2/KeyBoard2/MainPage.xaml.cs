@@ -23,59 +23,48 @@ namespace KeyBoard2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        double height;
         public MainPage()
         {
             this.InitializeComponent();
-            
+            MyFrame.Navigate(typeof(KeyBoard1));
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested
+               += App_BackRequested;
         }
-        
 
-        private void T2_GotFocus(object sender, RoutedEventArgs e)
+        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
         {
-            InputPane.GetForCurrentView().TryHide();
-            Row2.Height = new GridLength(height);
-        }
-
-        private void T2_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-            Row2.Height = new GridLength(0);
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            height = G1.ActualHeight;
-            Row2.Height = new GridLength(0);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null) return;
+            if (rootFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
 
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(KeyBoard3));
-        }
-
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
+
             var appBar = sender as AppBarButton;
             string appBarLable = appBar.Label;
             switch (appBarLable)
             {
+
                 case "back":
-                    if (Frame.CanGoBack)
+                    if (MyFrame == null) return;
+                    if (MyFrame.CanGoBack)
                     {
-                        Frame.GoBack();
+                        MyFrame.GoBack();
                     }
                     break;
                 case "forward":
-                    if (Frame.CanGoForward) Frame.GoForward();
+                    if (MyFrame.CanGoForward) MyFrame.GoForward();
                     break;
             }
         }
+
+
+
 
     }
 }
