@@ -26,21 +26,45 @@
                             <Setter Property="TabNavigation" Value="Cycle"/>
                         </Style>
                     </Flyout.FlyoutPresenterStyle>-->
-                    <GridView  Name="MyGridView" IsItemClickEnabled="True" SelectionMode="None"
+                    <GridView  Name="MyGridView" IsItemClickEnabled="True" SelectionMode="None" 
                       ItemClick="MyGridView_ItemClick"  Width="{Binding ActualWidth,ElementName=grid}" Height="AUTO">
+                        <!--Item template-->
+                        <GridView.ItemTemplate >
+                            <DataTemplate x:DataType="local:NameColor">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition MinWidth="54"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Rectangle Width="44" Height="44" Fill="{x:Bind Brush}" Grid.RowSpan="2"/>
+                                    <TextBlock Text="{x:Bind Name}" Grid.Column="1" Grid.ColumnSpan="4"/>
+                                    <TextBlock Text="{x:Bind Color.R}" Grid.Column="1" Grid.Row="1" Foreground="Red"/>
+                                    <TextBlock Text="{x:Bind Color.G}" Grid.Column="2" Grid.Row="1" Foreground="Green"/>
+                                    <TextBlock Text="{x:Bind Color.B}" Grid.Column="3" Grid.Row="1" Foreground="Blue"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapGrid Orientation="Horizontal" Margin="2" Background="AliceBlue" Width="auto" MaximumRowsOrColumns="4" ></WrapGrid>
+                                <WrapGrid Orientation="Horizontal" Margin="2" Width="AUTO" MaximumRowsOrColumns="4" ></WrapGrid>
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
-                        <x:String>0</x:String>
+                        <!--<x:String>0</x:String>
                         <x:String>1</x:String>
                         <x:String>2</x:String>
                         <x:String>3</x:String>
                         <x:String>4</x:String>
                         <x:String>5</x:String>
                         <x:String>6</x:String>
-                        <x:String>Backspace</x:String>
+                        <x:String>Backspace</x:String>-->
                     </GridView>
                 </Flyout>
             </FlyoutBase.AttachedFlyout>

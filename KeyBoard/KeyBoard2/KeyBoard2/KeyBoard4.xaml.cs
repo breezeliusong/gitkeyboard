@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,9 +25,19 @@ namespace KeyBoard2
     /// </summary>
     public sealed partial class KeyBoard4 : Page
     {
+        
+   private List<NameColor> NameColors = new List<NameColor>();
         public KeyBoard4()
         {
             this.InitializeComponent();
+            IEnumerable<PropertyInfo> propertyInfos = typeof(Colors).GetRuntimeProperties();
+            for(int i = 0; i < propertyInfos.Count(); i++)
+            {
+                NameColors.Add(new NameColor(propertyInfos.ElementAt(i).Name, 
+                    (Color)propertyInfos.ElementAt(i).GetValue(null)));
+            }
+            //TODO 
+            MyGridView.ItemsSource = NameColors;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -80,6 +92,20 @@ namespace KeyBoard2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+        }
+    }
+    class NameColor
+    {
+        public NameColor(string colorName,Color colorValue)
+        {
+            Name = colorName;
+            Color = colorValue;
+        }
+        public string Name { get; set; }
+        public Color Color { get; set; }
+        public SolidColorBrush Brush
+        {
+            get { return new SolidColorBrush(Color); }
         }
     }
 }
