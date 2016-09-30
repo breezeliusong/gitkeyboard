@@ -6,49 +6,45 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <!--<Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Width" Value="70"/>
+        </Style>
+    </Page.Resources>-->
 
     <Grid  Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Margin="5,20,0,0"></Button>
-        <TextBox GotFocus="TextBox_GotFocus" Name="MyTextBox" Tapped="TextBox_Tapped" LostFocus="TextBox_LostFocus" Width="300" Height="30">
+        
+        <TextBox GotFocus="TextBox_GotFocus" Name="MyTextBox" HorizontalAlignment="Stretch" LostFocus="TextBox_LostFocus" Width="200" Height="30">
             <FlyoutBase.AttachedFlyout >
-                <Flyout  Placement="Bottom" x:Name="Fly">
-                    <Flyout.FlyoutPresenterStyle>
+                <Flyout  Placement="Bottom"  x:Name="Fly" Closed="Fly_Closed">
+                    <!--<Flyout.FlyoutPresenterStyle>
                         <Style TargetType="FlyoutPresenter">
                             <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
                             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
                             <Setter Property="IsTabStop" Value="True"/>
                             <Setter Property="TabNavigation" Value="Cycle"/>
                         </Style>
-                    </Flyout.FlyoutPresenterStyle>
-                    <GridView  Name="MyGridView" IsItemClickEnabled="True" 
-                      ItemClick="MyGridView_ItemClick" Width="{Binding ActualWidth,ElementName=grid}" Height="AUTO">
-                        <GridView.Items>
-                        <Button Content="0" Background="White" Width="70" />
-                        <Button Content="1" Background="White" Width="66" />
-                        <Button Content="2" Background="White" Width="66" />
-                        <Button Content="3" Background="White" Width="66" />
-                        <Button Content="4" Background="White" Width="66" />
-                        <Button Content="5" Background="White" Width="66" />
-                        <Button Content="6" Background="White" Width="66" />
-                        <Button Content="7" Background="White" Width="66" />
-                        <Button Content="8" Background="White" Width="66" />
-                        <Button Content="9" Background="White" Width="66" />
-                        <Button Content="a" Background="White" Width="66" />
-                        <Button Content="b" Background="White" Width="66" />
-                        <Button Content="c" Background="White" Width="66" />
-                        <Button Content="d" Background="White" Width="66" />
-                        <Button Content="e" Background="White" Width="66" />
-                        <Button Content="f" Background="White" Width="66" />
-                        </GridView.Items>
+                    </Flyout.FlyoutPresenterStyle>-->
+                    <GridView  Name="MyGridView" IsItemClickEnabled="True" SelectionMode="None"
+                      ItemClick="MyGridView_ItemClick"  Width="{Binding ActualWidth,ElementName=grid}" Height="AUTO">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-
-                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" ></WrapGrid>
+                                <WrapGrid Orientation="Horizontal" Margin="2" Background="AliceBlue" Width="auto" MaximumRowsOrColumns="4" ></WrapGrid>
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
+                        <x:String>0</x:String>
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                        <x:String>6</x:String>
+                        <x:String>Backspace</x:String>
                     </GridView>
                 </Flyout>
             </FlyoutBase.AttachedFlyout>
         </TextBox>
+        <Button Name="Bt"></Button>
     </Grid>
 </Page>

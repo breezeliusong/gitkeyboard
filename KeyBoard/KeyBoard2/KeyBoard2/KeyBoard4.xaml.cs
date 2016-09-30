@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -29,6 +30,7 @@ namespace KeyBoard2
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            Windows.UI.ViewManagement.InputPane.GetForCurrentView().TryHide();
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             
         }
@@ -41,18 +43,43 @@ namespace KeyBoard2
         private void TextBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
         }
+        List<string> selectedItems=new List<string>();
 
         private void MyGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            object text=((Button)sender).Content ;
-            MyTextBox.Text = text.ToString();
+            
+            string text=e.ClickedItem.ToString();
+            if (text == "Backspace")
+            {
+               int num= selectedItems.Count;
+                if (num >= 1)
+                {
+                selectedItems.Remove(selectedItems[num - 1]);
+                //MyTextBox.Text= selectedItems.Join("",selectedItems.ToArray).ToString();
+                StringBuilder builder = new StringBuilder();
+                foreach (string s in selectedItems) // Loop through all strings
+                {
+                    builder.Append(s).Append(""); // Append string to StringBuilder
+                }
+                string result = builder.ToString(); // Get string from StringBuilder
+                MyTextBox.Text = result;
+                }
+            }
+            else
+            {
+                selectedItems.Add(e.ClickedItem.ToString());
+                MyTextBox.Text+=e.ClickedItem.ToString();
+            }
         }
-        List<object> selectedItems;
 
-        private void ItemView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void Fly_Closed(object sender, object e)
         {
-            // Use e.AddedItems to get the items that are selected in the ItemsControl.
-            selectedItems = (List<object>)e.AddedItems;
+            Bt.Focus(FocusState.Programmatic);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
